@@ -1,14 +1,40 @@
 
-.header__titulo{
+#header__titulo{
     color: rgb(0 0 0);
     text-align: right;
 }
-.body{
+#body{
+    padding: 5px;
     background-color: black;
     background-image: url(../images/fondo.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    margin: 1rem;
-  
+ 
 }
+#body>header{
+    padding:10px;
+}
+#main{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+#form{
+    padding: 1rem;
+    grid-column: 1;
+
+}
+#tabla{
+    width: 93%;
+    border: groove 10px #090a0a;
+    background-color:#1095c1;
+    grid-column: 2;
+    justify-content: center;
+    place-self: start;
+}
+h1,h2{
+    margin-bottom:10px;    
+    font-size: 1.5rem;
+    color:#1095c1;
+    align-items: center;
 }
