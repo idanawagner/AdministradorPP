@@ -9,23 +9,17 @@ class Operacion{
 };
 class AdministradorOper{
     constructor(){
-        this.ingresos=[];
-        this.egresos=[];
+        this.operacion=[];
         this.tabla=tabla;
-        this.totalIngresos=0;
-        this.totalEgresos=0;
         this.saldo=0;
     }
     renderTabla(){
         let thead= document.createElement('thead');
-        thead.innerHTML=`
-                        <tr>
+        thead.innerHTML=`<tr>
                             <th>Fecha</th>
                             <th>Concepto</th>
-                            <th>Ingresos</th>
-                            <th>Egresos</th>
-                            <th></th>
-                        </tr>`;
+                            <th>Importe</th>
+                         </tr>`;
         this.tabla.append(thead);
         let tbody= document.createElement('tbody');
         tbody.id='tbody';
@@ -36,17 +30,19 @@ class AdministradorOper{
         administrador.recuperarOp();         
         administrador.actualizarTabla();
         
-    }
+    }//metodo crear el formato de la tabla
+    faltanDatos(){
+        let datos = (inputConcepto.value==''|| isNaN(inputImporte.value) || inputImporte.value=='')? true: false
+        return datos
+    }//metodo validar datos
     actualizarTabla(){
             tbody.innerHTML="";
-            if (this.ingresos.length>0){
-                for (let i=0; i<this.ingresos.length;i++){
+            if (this.operacion.length>0){
+                for (let i=0; i<this.operacion.length;i++){
                     let fila=document.createElement('tr');
-                    fila.innerHTML=` <td>${this.ingresos[i].fecha}</td>
-                                     <td>${this.ingresos[i].concepto}</td>
-                                     <td>${this.ingresos[i].importe}</td>
-                                     <td></td>
-                                     `;
+                    fila.innerHTML= `<td>${this.operacion[i].fecha}</td>
+                                     <td>${this.operacion[i].concepto}</td>
+                                     <td>${this.operacion[i].importe}</td>`;
                     let boton=document.createElement('button');
                     boton.innerText='Eliminar';
                     let ref=this;
@@ -56,85 +52,49 @@ class AdministradorOper{
                             icon: 'success',
                             confirmButtonText: 'Aceptar'
                           })
-                       let indice= ref.ingresos.findIndex((item)=>{
-                        return item.fecha==ref.ingresos[i].fecha && item.concepto==ref.ingresos[i].concepto && item.importe==ref.ingresos[i].importe  
+                       let indice= ref.operacion.findIndex((item)=>{
+                        return item.fecha==ref.operacion[i].fecha && item.concepto==ref.operacion[i].concepto && item.importe==ref.operacion[i].importe  
                        })
-                       ref.ingresos.splice(indice,1);
+                       ref.operacion.splice(indice,1);
                        this.actualizarTabla();
                        this.actualizarLS();
 
                     })
                     fila.append(boton);
-                    fila.id= 'ingreso' +i;
+                    fila.id= 'operacion' +i;
                     tbody.append(fila);
                 }
             }
-            if (this.egresos.length>0){
-                for (let i=0; i<this.egresos.length;i++){
-                    let fila=document.createElement('tr');
-                    fila.innerHTML=`<td>${this.egresos[i].fecha}</td>
-                                    <td>${this.egresos[i].concepto}</td>
+            administrador.balance();
+            tfoot.innerHTML=''
+            let ultimaFila=document.createElement('tr');
+            ultimaFila.innerHTML = `<td>TOTALES</td>
                                     <td></td>
-                                    <td>${this.egresos[i].importe}</td>
-                                     `;
-                    let boton=document.createElement('button');
-                    boton.innerText='Eliminar';
-                    let ref=this;
-                    boton.addEventListener('click',()=>{
-                        Swal.fire({
-                            title: 'Operacion eliminada',
-                            icon: 'success',
-                            confirmButtonText: 'Aceptar'
-                          });
-                       let indice= ref.egresos.findIndex((item)=>{
-                        return item.fecha==ref.egresos[i].fecha && item.concepto==ref.egresos[i].concepto && item.importe==ref.egresos[i].importe  
-                       });
-                       ref.egresos.splice(indice,1);
-                       this.actualizarTabla();
-                       this.actualizarLS();
-
-                    })
-                    fila.append(boton);
-                    fila.id= 'egreso' +i;
-                    tbody.append(fila);
-                }
-                
-           }
-           administrador.balance();
-           tfoot.innerHTML=''
-           let ultimaFila=document.createElement('tr');
-           ultimaFila.innerHTML=` <td>TOTALES</td>
-                            <td></td>
-                            <td>${this.totalIngresos}</td>
-                            <td>${this.totalEgresos}</td>
-                            <td>${this.saldo}</td>`
+                                    <td>${this.saldo}</td>`
             tfoot.append(ultimaFila);
-        
-    }
+    }//metodo actualizar tabla
     guardarOperacion(operacion,tipo){
-        tipo=='ingreso'? this.ingresos.unshift(operacion): this.egresos.unshift(operacion);
+        if (tipo=='egreso' && operacion.importe>0){
+            operacion.importe=operacion.importe*-1
+        }else{
+            if (tipo=='ingreso' && operacion.importe<0){
+                operacion.importe=operacion.importe*-1
+            }
+        }
+        this.operacion.unshift(operacion)
         this.actualizarLS();
     };//metodo guardar operacion al inicio del array
     
     actualizarLS(){
-        localStorage.setItem('Ingreso', JSON.stringify(this.ingresos));
-        localStorage.setItem('Egreso', JSON.stringify(this.egresos));
+        localStorage.setItem('OP', JSON.stringify(this.operacion));
     };//metodo actualizar local Storage
 
     recuperarOp(){
-        this.ingresos=JSON.parse(localStorage.getItem('Ingreso')) || [];
-        this.egresos=JSON.parse(localStorage.getItem('Egreso')) || [];
+        this.operacion=JSON.parse(localStorage.getItem('OP')) || [];
     };//metodo recuperar operaciones de local storage
 
     balance(){
-        if (this.ingresos.length>0){
-        this.totalIngresos = this.ingresos.reduce((total, i)=> total + i.importe,0);
-        }
-        if (this.egresos.length>0){
-            this.totalEgresos = this.egresos.reduce((total, e)=> total + e.importe,0);
-        }
-        this.saldo=this.totalIngresos-this.totalEgresos;
-        };
-    //metodo balance total
+        this.saldo=this.operacion.reduce((acc,el) => acc + el.importe,0)
+    }// metodo balance total
 }
 

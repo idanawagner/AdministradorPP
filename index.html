@@ -10,16 +10,17 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="./scripts/variables.js"></script>
     <script defer src="./scripts/clases.js"></script>
+    <script defer src="./scripts/app-json.js"></script>
     <script defer src="./scripts/main.js"></script>
 </head>
 <body id="body" >
     <header id="header">
-        <h1 class="header__titulo">Administración de Presupuesto Personal</h1>
+
     </header>
     <main id="main">
         <form action="" id="form">
-            <h2>Ingresos o Egreso</h2>
-            <select name="" id="input-tipo"  >
+            <h2>Ingreso o Egreso</h2>
+            <select name="" id="input-tipo">
                 <option value="ingreso">
                     ingreso
                 </option>
@@ -30,11 +31,11 @@
             <h2>Concepto</h2>
             <input type="text" id="input-concepto">
             <h2>Importe</h2>
-            <input type="text" name="" id="input-importe">
+            <input type="number" name="" id="input-importe">
             <button type='button' id="enviar">Enviar</button>
             
         </form>
-        <table id="tabla">
+        <table id="tabla" >
             
         </table>
     </main>

@@ -1,18 +1,30 @@
 
-#header__titulo{
+.container{
+   
+    justify-items: center;
+    align-items: center;
+    text-align: center
+    
+}
+#logo{
+    width: 10%;
+    padding: 1px;
+ 
+}
+#header-titulo{
     color: rgb(0 0 0);
-    text-align: right;
+
+  
 }
 #body{
     padding: 5px;
-    background-color: black;
-    background-image: url(../images/fondo.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #eee8e7
+    
  
 }
 #body>header{
-    padding:10px;
+    padding:10px; 
+    display: inline-flex;
 }
 #main{
     padding: 10px;
@@ -24,17 +36,20 @@
     grid-column: 1;
 
 }
+#enviar{
+    background-color:#2173e6
+}
 #tabla{
     width: 93%;
-    border: groove 10px #090a0a;
-    background-color:#1095c1;
+    border: groove 10px #1059b8;
+    background-color:#2173e6;
     grid-column: 2;
     justify-content: center;
     place-self: start;
 }
-h1,h2{
+h1,h2,h4{
     margin-bottom:10px;    
-    font-size: 1.5rem;
-    color:#1095c1;
+    font-size: 1.3rem;
+    color:#000000;
     align-items: center;
 }
