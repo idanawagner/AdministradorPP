@@ -48,7 +48,7 @@ class Datos{
             arrayDatos = data
             arrayDatos.forEach(dato => {
                     (inputUsuarioInic.value==dato.usuario && inputPasswordInic.value==dato.password)? 
-                        window.location.href = "./index.html":
+                        window.location.href = "./operaciones.html":
                             Swal.fire({
                                 title: 'Usuario no registrado',
                                 icon: 'error',
