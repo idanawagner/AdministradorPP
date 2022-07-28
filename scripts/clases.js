@@ -44,21 +44,32 @@ class AdministradorOper{
                                      <td>${this.operacion[i].concepto}</td>
                                      <td>${this.operacion[i].importe}</td>`;
                     let boton=document.createElement('button');
+                    boton.setAttribute('id','eliminar')
                     boton.innerText='Eliminar';
                     let ref=this;
                     boton.addEventListener('click',()=>{
                         Swal.fire({
-                            title: 'Operacion eliminada',
-                            icon: 'success',
+                            title: '¿Desea eliminar la operacion?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
                             confirmButtonText: 'Aceptar'
-                          })
-                       let indice= ref.operacion.findIndex((item)=>{
-                        return item.fecha==ref.operacion[i].fecha && item.concepto==ref.operacion[i].concepto && item.importe==ref.operacion[i].importe  
-                       })
-                       ref.operacion.splice(indice,1);
-                       this.actualizarTabla();
-                       this.actualizarLS();
-
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              Swal.fire(
+                                'Eliminada!',
+                                'Su operacion fue eliminada con exito!',
+                                'success'
+                                )
+                                let indice= ref.operacion.findIndex((item)=>{
+                                    return item.fecha==ref.operacion[i].fecha && item.concepto==ref.operacion[i].concepto && item.importe==ref.operacion[i].importe  
+                                })
+                                ref.operacion.splice(indice,1);
+                                this.actualizarTabla();
+                                this.actualizarLS();
+                            }
+                        })
                     })
                     fila.append(boton);
                     fila.id= 'operacion' +i;

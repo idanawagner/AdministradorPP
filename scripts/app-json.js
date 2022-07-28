@@ -1,8 +1,7 @@
-
 const armarHeader = (contenido)=> {
     const {icono, nombre, descripcion} = contenido
        let HTMLCard = ""
-             HTMLCard += `<div class="container">
+             HTMLCard += `<div class="container__header">
                               <div>
                                 <img id="logo" src="${icono}" alt="Logo">
                               </div>
@@ -16,8 +15,8 @@ const armarHeader = (contenido)=> {
                             </div>
                           </div>`
        return HTMLCard
-  }
-  const obtenerJSON = (URL)=>{ 
+}
+const obtenerJSON = (URL)=>{ 
     fetch(URL)
     .then(response => response.json())
     .then(data => {
@@ -27,16 +26,5 @@ const armarHeader = (contenido)=> {
       });
       headerDOM.innerHTML=mostrarCont
     })
-    .finally(()=> {
-        setTimeout(()=>{
-             Swal.fire({
-                 title: 'Bienvenidos!!',
-                 imageUrl: '/images/icono.svg',
-                 imageWidth:'30%',
-                 confirmButtonText: 'Ingresar'
-             })
-        
-        },500)
-    })
-
-  }
+}
+obtenerJSON(URL)
