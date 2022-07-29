@@ -57,11 +57,14 @@ class AdministradorOper{
                             confirmButtonText: 'Aceptar'
                           }).then((result) => {
                             if (result.isConfirmed) {
-                              Swal.fire(
-                                'Eliminada!',
-                                'Su operacion fue eliminada con exito!',
-                                'success'
-                                )
+                              Swal.fire({
+                                position: 'top-end',
+                                text:'OperacionEliminada!',
+                                icon:'success',
+                                showConfirmButton: false,
+                                width:'15em',
+                                timer: 1500
+                                })
                                 let indice= ref.operacion.findIndex((item)=>{
                                     return item.fecha==ref.operacion[i].fecha && item.concepto==ref.operacion[i].concepto && item.importe==ref.operacion[i].importe  
                                 })
