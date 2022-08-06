@@ -19,7 +19,7 @@
     color: #000000;
     padding: 35px;
     width: 600px;
-    background-color: rgba(173, 171, 171, 0.664);
+    background-color: rgba(241, 230, 230, 0.664);
     border-radius: 10px;
 }
 #btnSignIn, #btnSignUp{
@@ -42,7 +42,7 @@
 #body{
     margin:10px;
     padding: 5px;
-    background-color: #e9f0f3
+    background-color: #c8d6dc
 }
 #body>header{
     padding:10px; 
@@ -57,18 +57,22 @@
     padding: 1rem;
     grid-column: 1;
 }
-#enviar{
-    background-color:#2173e6
+input{
+    border: solid 10px #9b4dca;
 }
 #tabla{
     width: 93%;
-    border: groove 10px rgb(16, 89, 184);
-    background-color:rgb(33, 115, 230);
+    border: solid 10px #9b4dca;
+    background-color:#9b4dca;
     grid-column: 2;
     justify-content: center;
     place-self: start;
     justify-self: end;
+    color: black;
 } 
+#eliminar{
+    background-color: #4e1674;
+}
 h1,h2,h4{
     margin-bottom:10px;    
     font-size: 1.3rem;

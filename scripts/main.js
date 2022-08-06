@@ -7,7 +7,10 @@ enviar.addEventListener('click',()=>{
           toast: true,
           text:'Faltan cargar datos',
           icon:'warning',
-          color:'red'
+          color:'red',
+          width: '12em',
+          position: 'center',
+          height: '12em',
         })
     }else{
       const objOperacion= new Operacion(new Date().toLocaleDateString(),inputConcepto.value,inputImporte.value); //crea el objeto operacion

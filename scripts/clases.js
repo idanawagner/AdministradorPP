@@ -45,7 +45,9 @@ class AdministradorOper{
                                      <td>${this.operacion[i].importe}</td>`;
                     let boton=document.createElement('button');
                     boton.setAttribute('id','eliminar')
-                    boton.innerText='Eliminar';
+                    let iconoBoton=document.createElement('i');
+                    iconoBoton.setAttribute('class','fa-solid fa-trash-can')
+                    boton.append(iconoBoton)
                     let ref=this;
                     boton.addEventListener('click',()=>{
                         Swal.fire({
